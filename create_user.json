@@ -1,0 +1,9 @@
+{
+	"userid": "test2",
+	"name": "白白白",
+	"department": [1],
+	"email": "test2@gzdev.com",
+	"direct_leader":["BaiTianMing"],
+	"telephone": "020-123457",
+	"address": "北京市朝阳区新港中路"
+}
