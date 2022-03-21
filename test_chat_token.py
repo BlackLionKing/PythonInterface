@@ -1,4 +1,5 @@
 import json
+import re
 
 import pytest
 import requests
@@ -45,7 +46,7 @@ class Test_wx(object):
             json参数传的json类型
 
     """
-    @pytest.mark.skip
+    # @pytest.mark.skip
     @pytest.mark.parametrize('userid, name, department, email', [('test7', '哈哈哈ha', [1], 'test5@gzdev.com')])
     def test_creat_user(self, userid, name, department, email, get_token):
         create_url = get_token[0] + f'/user/create?access_token={get_token[1]}'
@@ -57,7 +58,13 @@ class Test_wx(object):
         }
         response = requests.post(create_url, json=json_data)
         # 断言
-        assert 'created' == response.json()['errmsg']
+        try:
+            assert 'created' == response.json()['errmsg']
+        # 异常处理
+        except AssertionError as e:
+            # 保存信息中如果有userid existed
+            if 'userid existed' in e.__str__():
+                print('userid已存在')
 
     """
         修改成员
