@@ -32,5 +32,7 @@ E         + created
 test_chat_token.py:60: AssertionError
 """
 
-re.findall("^= ")
-print(a)
+# pattern = re.compile(r'')
+# 正则匹配
+print(re.findall(r"test7", a)[0])
+# print(a)
