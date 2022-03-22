@@ -1,9 +1,6 @@
-import json
-import re
-
 import pytest
 import requests
-from create_user import create_user_data, read_user_data
+from test_demo.create_user import create_user_data, read_user_data
 from filelock import FileLock
 
 
@@ -37,7 +34,7 @@ class Test_wx(object):
         读取成员接口
     """
     @pytest.mark.parametrize('userid', read_user_data())
-    @pytest.mark.skip
+    # @pytest.mark.skip
     def test_getuser(self, userid, test_get_token):
         user_url = test_get_token[0] + f'/user/get?access_token={test_get_token[1]}&userid={userid}'
         response = requests.get(user_url)
