@@ -17,7 +17,7 @@ class Test_wx(object):
         # 接口
         url = ''
         # 文件锁 防止xdist并行 执行多次该方法
-        with FileLock("session.lock"):
+        with FileLock("./test_demo/session.lock"):
             url = 'https://qyapi.weixin.qq.com/cgi-bin'
             token_url = url + '/gettoken'
             # 参数
