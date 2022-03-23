@@ -28,7 +28,6 @@ update_user:
       userid: ${userid}
       name: ${name}
 
-
 delete_user:
   requests:
     method: post
