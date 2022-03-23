@@ -12,7 +12,7 @@ class Address(BaseApi):
         wework = Wework()
         self.token = wework.get_token(corp_secret)
         # 初始化yaml文件
-        with open('../data/requs.yaml') as f:
+        with open('../data/requests_data.yaml') as f:
             # 使用模版语言读取yaml文件
             self.re = Template(f.read())
 
