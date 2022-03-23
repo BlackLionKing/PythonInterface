@@ -1,6 +1,7 @@
 import pytest
 
 from api.address import Address
+from data.data_createuser import create_user_data
 
 
 class Test_address(object):
@@ -10,8 +11,9 @@ class Test_address(object):
     def test_get_user(self):
         self.address.get_user('BaiTianMing')
 
-    def test_create_user(self):
-        self.address.create_user('909090', 'xxxx', [1], '18201535343')
+    @pytest.mark.parametrize('userid, name, department, mobile', create_user_data())
+    def test_create_user(self, userid, name, department, mobile):
+        self.address.create_user(userid, name, department, mobile)
 
     def test_update_user(self):
         self.address.update_user('909090', 'xx')
