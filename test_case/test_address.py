@@ -16,10 +16,10 @@ class Test_address(object):
         self.address.create_user(userid, name, department, mobile)
 
     def test_update_user(self):
-        self.address.update_user('909090', 'xx')
+        self.address.update_user('baibai', '白')
 
     def test_delete_user(self):
-        self.address.delete_user('909090')
+        self.address.delete_user('baibai')
 
 
 if __name__ == '__main__':

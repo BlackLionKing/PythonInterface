@@ -1,7 +1,38 @@
-name: get_user
-requests:
+get_user:
+  requests:
    method: get
    url: https://qyapi.weixin.qq.com/cgi-bin/user/get
    params:
     access_token: ${access_token}
     userid: ${userid}
+
+create_user:
+  requests:
+    method: post
+    url: https://qyapi.weixin.qq.com/cgi-bin/user/create
+    params:
+      access_token: ${access_token}
+    json:
+      userid: ${userid}
+      name: ${name}
+      department: ${department}
+      mobile: ${mobile}
+
+update_user:
+  requests:
+    method: post
+    url: https://qyapi.weixin.qq.com/cgi-bin/user/update
+    params:
+      access_token: ${access_token}
+    json:
+      userid: ${userid}
+      name: ${name}
+
+
+delete_user:
+  requests:
+    method: post
+    url: https://qyapi.weixin.qq.com/cgi-bin/user/delete
+    params:
+      access_token: ${access_token}
+      userid: ${userid}

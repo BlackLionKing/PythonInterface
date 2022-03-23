@@ -27,50 +27,35 @@ class Address(BaseApi):
         # 将yaml文件转换为python类型
         yaml_data = yaml.safe_load(params)
         # 发送请求
-        response = self.send(yaml_data['requests'])
+        response = self.send(yaml_data['get_user']['requests'])
         print(response)
 
+    """
+        创建成员
+    """
     def create_user(self, userid, name, department, mobile):
-        data = {
-            'method': 'post',
-            'url': 'https://qyapi.weixin.qq.com/cgi-bin/user/create',
-            'params': {
-                'access_token': self.token,
-                'userid': {userid}
-            },
-            'json': {
-                'userid': userid,
-                'name': name,
-                'department': department,
-                'mobile': mobile
-            }
-        }
-        response = self.send(data)
+        value = {'userid': userid, 'name': name, 'department': department, 'mobile': mobile, 'access_token': self.token}
+        params = self.re.safe_substitute(value)
+        yaml_data = yaml.safe_load(params)
+        response = self.send(yaml_data['create_user']['requests'])
         print(response)
 
+    """
+        修改成员
+    """
     def update_user(self, userid, name):
-        data = {
-            'method': 'post',
-            'url': 'https://qyapi.weixin.qq.com/cgi-bin/user/update',
-            'params': {
-                'access_token': self.token
-            },
-            'json': {
-                "userid": userid,
-                "name": name
-            }
-        }
-        response = self.send(data)
+        value = {'userid': userid, 'name': name, 'access_token': self.token}
+        params = self.re.safe_substitute(value)
+        yaml_data = yaml.safe_load(params)
+        response = self.send(yaml_data['update_user']['requests'])
         print(response)
 
+    """
+        删除成员
+    """
     def delete_user(self, userid):
-        data = {
-            'method': 'post',
-            'url': 'https://qyapi.weixin.qq.com/cgi-bin/user/delete',
-            'params': {
-                'access_token': self.token,
-                'userid': userid
-            }
-        }
-        response = self.send(data)
+        value = {'userid': userid, 'access_token': self.token}
+        params = self.re.safe_substitute(value)
+        yaml_data = yaml.safe_load(params)
+        response = self.send(yaml_data['delete_user']['requests'])
         print(response)
