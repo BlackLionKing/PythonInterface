@@ -1,20 +1,13 @@
 from api.base_api import BaseApi
+from api.wework import Wework
 
 
 class Address(BaseApi):
-    def get_token(self):
-        data = {
-            'method': 'get',
-            'url': 'https://qyapi.weixin.qq.com/cgi-bin/gettoken',
-            'params': {
-                "corpid": "wwc4fcb20970b14103",
-                "corpsecret": "HYCEYvE8vImVbOK0DCtpryue_AksK28639bUtnrWDM4"
-            }
-        }
-        # 拿到token
-        res = self.send(data)
-        token = res['access_token']
-        return token
+    # 初始化token信息 保证每次token只被执行一次
+    def __init__(self):
+        corp_secret = "HYCEYvE8vImVbOK0DCtpryue_AksK28639bUtnrWDM4"
+        wework = Wework()
+        self.token = wework.get_token(corp_secret)
 
     """
         读取成员接口
@@ -24,7 +17,7 @@ class Address(BaseApi):
             'method': 'get',
             'url': 'https://qyapi.weixin.qq.com/cgi-bin/user/get',
             'params': {
-                'access_token': self.get_token(),
+                'access_token': self.token,
                 'userid': {userid}
             }
         }
@@ -36,7 +29,7 @@ class Address(BaseApi):
             'method': 'post',
             'url': 'https://qyapi.weixin.qq.com/cgi-bin/user/create',
             'params': {
-                'access_token': self.get_token(),
+                'access_token': self.token,
                 'userid': {userid}
             },
             'json': {
@@ -54,7 +47,7 @@ class Address(BaseApi):
             'method': 'post',
             'url': 'https://qyapi.weixin.qq.com/cgi-bin/user/update',
             'params': {
-                'access_token': self.get_token()
+                'access_token': self.token
             },
             'json': {
                 "userid": userid,
@@ -69,7 +62,7 @@ class Address(BaseApi):
             'method': 'post',
             'url': 'https://qyapi.weixin.qq.com/cgi-bin/user/delete',
             'params': {
-                'access_token': self.get_token(),
+                'access_token': self.token,
                 'userid': userid
             }
         }
