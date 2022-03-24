@@ -1,3 +1,11 @@
+get_token:
+  requests:
+    method: get
+    url: https://qyapi.weixin.qq.com/cgi-bin/gettoken
+    params:
+      corpid: wwc4fcb20970b14103
+      corpsecret: ${corpsecret}
+
 get_user:
   requests:
    method: get

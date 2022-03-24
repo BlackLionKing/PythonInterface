@@ -1,17 +1,22 @@
+from string import Template
+
+import yaml
+
 from api.base_api import BaseApi
 
 
 class Wework(BaseApi):
+    def __init__(self):
+        with open('../data/requests_data.yaml') as f:
+            self.re = Template(f.read())
+        pass
+
     def get_token(self, corp_secret):
-        data = {
-            'method': 'get',
-            'url': 'https://qyapi.weixin.qq.com/cgi-bin/gettoken',
-            'params': {
-                "corpid": "wwc4fcb20970b14103",
-                "corpsecret": corp_secret
-            }
-        }
-        # 拿到token
-        res = self.send(data)
-        token = res['access_token']
-        return token
+        value = {'corpsecret': corp_secret}
+        params = self.re.safe_substitute(value)
+        yaml_data = yaml.safe_load(params)
+        print(yaml_data)
+        # 发送请求
+        token = self.send(yaml_data['get_token']['requests'])
+        token_data = token['access_token']
+        return token_data
