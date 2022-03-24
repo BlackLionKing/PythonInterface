@@ -1,0 +1,9 @@
+get_user:
+  BaiTianMing
+
+update_user:
+  - test
+  - 哈哈哈哈哈哈哈哈哈哈哈
+
+delete_user:
+  test

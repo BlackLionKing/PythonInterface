@@ -9,13 +9,11 @@ class Wework(BaseApi):
     def __init__(self):
         with open('../data/requests_data.yaml') as f:
             self.re = Template(f.read())
-        pass
 
     def get_token(self, corp_secret):
         value = {'corpsecret': corp_secret}
         params = self.re.safe_substitute(value)
         yaml_data = yaml.safe_load(params)
-        print(yaml_data)
         # 发送请求
         token = self.send(yaml_data['get_token']['requests'])
         token_data = token['access_token']
